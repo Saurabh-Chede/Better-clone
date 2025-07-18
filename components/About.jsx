@@ -52,7 +52,7 @@ export default function About() {
           </div>
         </div>
       </header> */}
-      <Navbar/>
+      <Navbar />
 
       {/* Hero Section */}
       {/* <section className="h-screen py-28">
@@ -149,16 +149,16 @@ export default function About() {
         <section className="px-4 py-16">
           <div className="mx-auto max-w-7xl text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-8">Backed by</h2>
-           <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 opacity-80">
-          {companyLogos.map((logo, index) => (
-            <img
-              key={index}
-              src={logo}
-              alt={`Company ${index + 1}`}
-              className="h-10 sm:h-20 object-contain"
-            />
-          ))}
-        </div>
+            <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 opacity-80">
+              {companyLogos.map((logo, index) => (
+                <img
+                  key={index}
+                  src={logo}
+                  alt={`Company ${index + 1}`}
+                  className="h-10 sm:h-20 object-contain"
+                />
+              ))}
+            </div>
           </div>
         </section>
 
@@ -226,17 +226,37 @@ export default function About() {
                       "Launched our AI-powered underwriting system for faster approvals.",
                   },
                 ].map((item, index) => (
-                  <div key={index} className="relative flex items-center">
-                    <div className="absolute left-1/2 w-4 h-4 bg-green-600 rounded-full transform -translate-x-1/2"></div>
-                    <div
-                      className={`w-5/12 ${index % 2 === 0 ? "pr-8 text-right" : "ml-auto pl-8"
-                        }`}
-                    >
-                      <Card className="bg-gray-50">
+                  // <div key={index} className="relative flex items-center">
+                  //   <div className="absolute left-1/2 w-4 h-4 bg-green-600 rounded-full transform -translate-x-1/2">{item.year}</div>
+                  //   <div
+                  //     className={`w-5/12 ${index % 2 === 0 ? "pr-8 text-right" : "ml-auto pl-8"
+                  //       }`}
+                  //   >
+                  //     <Card className="bg-gray-100">
+                  //       <CardContent className="p-6">
+                  //         <div className="text-green-600 font-semibold mb-2">
+                  //           {item.year}
+                  //         </div>
+                  //         <h3 className="font-semibold text-gray-900 mb-2">
+                  //           {item.title}
+                  //         </h3>
+                  //         <p className="text-gray-600 text-sm">
+                  //           {item.description}
+                  //         </p>
+                  //       </CardContent>
+                  //     </Card>
+                  //   </div>
+                  // </div>
+                  <div key={index} className="relative flex items-center py-6">
+                    {/* Badge showing year */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-600 text-white text-xs px-3 py-1 rounded-full shadow-md whitespace-nowrap">
+                      {item.year}
+                    </div>
+
+                    {/* Timeline card */}
+                    <div className={`w-5/12 ${index % 2 === 0 ? "pr-8 text-right" : "ml-auto pl-8"}`}>
+                      <Card className="bg-gray-100">
                         <CardContent className="p-6">
-                          <div className="text-green-600 font-semibold mb-2">
-                            {item.year}
-                          </div>
                           <h3 className="font-semibold text-gray-900 mb-2">
                             {item.title}
                           </h3>
@@ -247,6 +267,7 @@ export default function About() {
                       </Card>
                     </div>
                   </div>
+
                 ))}
               </div>
             </div>
@@ -317,11 +338,11 @@ export default function About() {
                     <p className="text-gray-600 text-sm mb-4">{post.excerpt}</p>
                     <p className="text-gray-500 text-xs">{post.date}</p>
                     <div className="flex items-center gap-1 text-green-800 text-sm mt-2">
-                      
+
                       <span>Read More</span>
                       <ArrowRight
-                      width={14}
-                      height={14}
+                        width={14}
+                        height={14}
                       />
                     </div>
                   </CardContent>

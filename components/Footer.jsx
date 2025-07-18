@@ -77,7 +77,7 @@ export default function Footer () {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-600 hover:text-gray-900 text-sm">
+                <Link href="mortgageCalculator" className="text-gray-600 hover:text-gray-900 text-sm">
                   Mortgage calculator
                 </Link>
               </li>
@@ -92,7 +92,7 @@ export default function Footer () {
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-600 hover:text-gray-900 text-sm">
+                <Link href="/mortgageCalculator" className="text-gray-600 hover:text-gray-900 text-sm">
                   Mortgage calculator with PMI
                 </Link>
               </li>
