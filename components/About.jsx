@@ -2,11 +2,23 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Footer from "./Footer";
+import { ArrowRight } from "lucide-react";
+import Navbar from "./Navbar";
 
 export default function About() {
+
+  const companyLogos = [
+    "/images/company/download.svg",
+    "/images/company/download1.svg",
+    "/images/company/download2.svg",
+    "/images/company/download3.svg",
+    "/images/company/download4.svg",
+    "/images/company/download5.svg",
+    "/images/company/download6.svg",
+  ];
   return (
     <div className="min-h-screen bg-white">
-      <header className="border-b border-gray-200 px-4 py-4">
+      {/* <header className="border-b border-gray-200 px-4 py-4">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
           <div className="flex items-center space-x-8">
             <div className="text-2xl font-bold text-green-600">
@@ -39,7 +51,8 @@ export default function About() {
             </Button>
           </div>
         </div>
-      </header>
+      </header> */}
+      <Navbar/>
 
       {/* Hero Section */}
       {/* <section className="h-screen py-28">
@@ -81,7 +94,7 @@ export default function About() {
         {/* Status Quo Section */}
         <section className="px-4 lg:px-20 lg:py-30 py-16 lg:mx-20">
           <div className="mx-auto max-w-7xl">
-            <div className="flex gap-8">
+            <div className="flex flex-col lg:flex-row gap-8">
               <div>
                 <h2 className="text-2xl lg:text-[32px] opacity-90 font-bold text-gray-900 mb-6">
                   The status quo is broken
@@ -109,12 +122,12 @@ export default function About() {
         </section>
 
         {/* How We're Changing Things */}
-        <section className="bg-emerald-800 px-4 text-white">
+        <section className="bg-emerald-800 px-4 text-white pt-10">
           <div className="mx-auto max-w-7xl lg:mx-20 lg:px-20 lg:py-20 flex flex-col">
             <h2 className="text-3xl lg:text-5xl font-bold mb-8">
               How we're changing things
             </h2>
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5 pb-10">
               <p>
                 Homeownership is a huge part of our economy. Housing overall is
                 a $33 trillion business, and mortgages account for $15 trillion.
@@ -136,14 +149,16 @@ export default function About() {
         <section className="px-4 py-16">
           <div className="mx-auto max-w-7xl text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-8">Backed by</h2>
-            <div className="flex flex-wrap items-center justify-center gap-8 opacity-60">
-              <div className="text-xl font-bold">Goldman Sachs</div>
-              <div className="text-xl font-bold">Ally</div>
-              <div className="text-xl font-bold">Citi</div>
-              <div className="text-xl font-bold">ZOOM</div>
-              <div className="text-xl font-bold">Kleiner Perkins</div>
-              <div className="text-xl font-bold">Pine Point</div>
-            </div>
+           <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 opacity-80">
+          {companyLogos.map((logo, index) => (
+            <img
+              key={index}
+              src={logo}
+              alt={`Company ${index + 1}`}
+              className="h-10 sm:h-20 object-contain"
+            />
+          ))}
+        </div>
           </div>
         </section>
 
@@ -240,7 +255,7 @@ export default function About() {
 
         {/* Related Posts */}
         <section className="bg-gray-50 px-4 py-16">
-          <div className="mx-auto max-w-7xl">
+          <div className="mx-auto max-w-7xl lg:mx-20 lg:px-44">
             <h2 className="text-3xl font-bold text-gray-900 mb-8">
               Related posts
             </h2>
@@ -278,6 +293,21 @@ export default function About() {
                   excerpt: "Break down of all the costs involved in closing.",
                   date: "February 20, 2024",
                 },
+                {
+                  title: "Closing costs explained",
+                  excerpt: "Break down of all the costs involved in closing.",
+                  date: "February 20, 2024",
+                },
+                {
+                  title: "Closing costs explained",
+                  excerpt: "Break down of all the costs involved in closing.",
+                  date: "February 20, 2024",
+                },
+                {
+                  title: "Closing costs explained",
+                  excerpt: "Break down of all the costs involved in closing.",
+                  date: "February 20, 2024",
+                },
               ].map((post, index) => (
                 <Card key={index} className="hover:shadow-lg transition-shadow">
                   <CardContent className="p-6">
@@ -286,6 +316,14 @@ export default function About() {
                     </h3>
                     <p className="text-gray-600 text-sm mb-4">{post.excerpt}</p>
                     <p className="text-gray-500 text-xs">{post.date}</p>
+                    <div className="flex items-center gap-1 text-green-800 text-sm mt-2">
+                      
+                      <span>Read More</span>
+                      <ArrowRight
+                      width={14}
+                      height={14}
+                      />
+                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -295,7 +333,7 @@ export default function About() {
       </div>
 
       {/* Footer */}
-      <Footer/>
+      <Footer />
     </div>
   );
 }
