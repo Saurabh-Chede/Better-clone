@@ -32,7 +32,7 @@ function Testimonial() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative w-full h-full">
               <div className="flex flex-col items-center p-4">
-                <div className="w-[230px] rounded-xl overflow-hidden shadow-lg mb-4">
+                <div className="w-[300px] rounded-xl overflow-hidden shadow-lg mb-4">
                   <iframe
                     width="100%"
                     height="400"
