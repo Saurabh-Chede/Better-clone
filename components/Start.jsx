@@ -215,29 +215,19 @@ export default function Multistage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      {/* <header className="flex items-center justify-between px-18 py-4 border-b border-gray-100">
-        <div className="flex items-center">
-          <img src="/images/download.svg" alt="" />
-        </div>
-        <Button variant="ghost" size="icon" className="text-gray-600">
-          <Phone className="h-5 w-5" />
-        </Button>
-      </header> */}
-
-      {/* Header */}
+     
+     
       <header className="relative flex items-center justify-between mx-18 py-4 border-b-4 border-gray-100 bg-white">
-        {/* Logo */}
+       
         <div className="flex items-center">
           <img src="/images/download.svg" alt="logo" className="h-6" />
         </div>
 
-        {/* Phone Icon */}
+        
         <Button variant="ghost" size="icon" className="text-gray-600">
           <Phone className="h-5 w-5" />
         </Button>
 
-        {/* 👇 Conditionally render avatar only on initial step */}
         {currentStep === "initial" && (
           <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-white p-1 rounded-full border border-gray-200 shadow-md">
             <img
@@ -249,9 +239,6 @@ export default function Multistage() {
         )}
       </header>
 
-
-
-      {/* Main Content */}
       <main className="max-w-2xl mx-auto px-6 py-12">
         {currentStep === "initial" && renderInitialStep()}
         {currentStep === "loading" && renderLoadingStep()}
@@ -259,8 +246,7 @@ export default function Multistage() {
         {currentStep === "refinancing" && renderRefinancingStep()}
         {currentStep === "cash" && renderCashStep()}
       </main>
-
-      {/* Footer - Only show on initial step */}
+      
       {currentStep === "initial" && (
         <footer className="bg-white border-t border-gray-100 px-6 py-12">
           <div className="max-w-6xl mx-auto">

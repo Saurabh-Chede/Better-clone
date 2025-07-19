@@ -17,58 +17,7 @@ export default function About() {
   ];
   return (
     <div className="min-h-screen bg-white">
-      {/* <header className="border-b border-gray-200 px-4 py-4">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <div className="flex items-center space-x-8">
-            <div className="text-2xl font-bold text-green-600">
-              <a href="/">Better</a>
-            </div>
-            <nav className="hidden space-x-6 md:flex">
-              <a href="#" className="text-gray-700 hover:text-gray-900">
-                Buy
-              </a>
-              <a href="#" className="text-gray-700 hover:text-gray-900">
-                Refinance
-              </a>
-              <a href="#" className="text-gray-700 hover:text-gray-900">
-                HELOC
-              </a>
-              <a href="#" className="text-gray-700 hover:text-gray-900">
-                Rates
-              </a>
-              <a href="#" className="text-gray-700 hover:text-gray-900">
-                Better+
-              </a>
-            </nav>
-          </div>
-          <div className="flex items-center space-x-4">
-            <Button variant="ghost" className="text-gray-700">
-              Sign in
-            </Button>
-            <Button className="bg-green-600 hover:bg-green-700">
-              Get started
-            </Button>
-          </div>
-        </div>
-      </header> */}
       <Navbar />
-
-      {/* Hero Section */}
-      {/* <section className="h-screen py-28">
-        <div className="">
-          <div className="flex justify-center mx-[80px] px-[75px] flex-col">
-          <div className="text-center mb-4">
-            <h1 className="text-green-600 text-[32px] font-medium">Our mission</h1>
-          </div>
-          
-            <div className="text-center">
-              <h2 className="text-2xl font-bold text-gray-900 lg:text-5xl tracking-tight opacity-90">
-                We're making homeownership simpler, faster — <br /> and most importantly, more accessible for all Americans.
-              </h2>
-          </div>
-        </div>
-        </div>
-      </section> */}
       <div className="">
         <section className="h-auto py-28 sm:py-20 md:py-28 lg:mx-20">
           <div className="px-4 sm:px-8 md:px-16 lg:px-20">

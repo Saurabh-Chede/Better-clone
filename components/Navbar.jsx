@@ -33,9 +33,6 @@ function Navbar({ heroRef, forceWhiteNav = false }) {
     return (
 
         <>
-            {/* <header className="bg-emerald-900 text-white px-[20px] py-[20px] sticky top-0 z-50
-            transition-all duration-300
-            "> */}
             <header
                 className={`px-[20px] py-[20px] sticky top-0 z-50 transition-all duration-300 ${showWhiteNav ? "bg-white text-black shadow-md" : "bg-emerald-900 text-white"
                     }`}
