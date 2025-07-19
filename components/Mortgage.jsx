@@ -14,6 +14,8 @@ import {
 import { Slider } from "@/components/ui/slider";
 import { Card, CardContent } from "@/components/ui/card";
 import { Phone } from "lucide-react";
+import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 export default function Mortgage() {
   const [homePrice, setHomePrice] = useState(300000);
@@ -54,7 +56,7 @@ export default function Mortgage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b">
+      {/* <header className="bg-white border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-8">
@@ -88,7 +90,8 @@ export default function Mortgage() {
             </div>
           </div>
         </div>
-      </header>
+      </header> */}
+      <Navbar></Navbar>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Main Calculator Section */}
@@ -272,8 +275,8 @@ export default function Mortgage() {
 
         {/* Educational Content */}
         <div className="space-y-12">
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <section className="border-t border-gray-500 border-b pb-6">
+            <h2 className="text-2xl font-bold text-gray-900 mt-5 mb-4">
               How does a mortgage calculator help me?
             </h2>
             <p className="text-gray-600 leading-relaxed">
@@ -309,7 +312,7 @@ export default function Mortgage() {
           </section>
 
           {/* Debt-to-Income Example */}
-          <Card>
+          {/* <Card>
             <CardContent className="p-8">
               <div className="text-center mb-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
@@ -372,7 +375,7 @@ export default function Mortgage() {
                 </div>
               </div>
             </CardContent>
-          </Card>
+          </Card> */}
 
           <section>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
@@ -499,6 +502,7 @@ export default function Mortgage() {
           </section>
         </div>
       </div>
+       <Footer></Footer>
     </div>
   );
 }

@@ -383,7 +383,7 @@ const content = {
 };
 
 function Questions() {
-    const [activeTab, setActiveTab] = useState("guides");
+    const [activeTab, setActiveTab] = useState("products");
 
     return (
         <div className="px-6 mt-10">

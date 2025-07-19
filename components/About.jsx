@@ -6,7 +6,6 @@ import { ArrowRight } from "lucide-react";
 import Navbar from "./Navbar";
 
 export default function About() {
-
   const companyLogos = [
     "/images/company/download.svg",
     "/images/company/download1.svg",
@@ -100,13 +99,15 @@ export default function About() {
                   The status quo is broken
                 </h2>
                 <p className="text-gray-600 mb-6 text-16px leading-relaxed">
-                  The traditional mortgage process is slow, confusing, and
-                  stressful. We're changing that by using technology to make it
-                  simple, transparent, and fast. Our digital-first approach
-                  means you can get approved in minutes, not weeks.
+                  The traditional processes around homeownership are opaque and
+                  stressful. Fees aren’t transparent and some are simply
+                  outrageous in size. Traditional mortgage lending is rife with
+                  unnecessary fees and slow, painful processes. It’s a system
+                  set up to benefit insiders — not you. Better.com CEO, Vishal
+                  Garg, set out to change that.
                 </p>
-                <Button className="bg-green-600 hover:bg-green-700 lg:mt-8 lg:px-7 lg:py-6">
-                  Learn more about us
+                <Button className="bg-green-800 hover:bg-green-900 text-white lg:mt-8 lg:px-7 lg:py-6">
+                  Read Vishal's Story
                 </Button>
               </div>
               <div className="relative w-full max-w-[400px] aspect-square">
@@ -254,7 +255,11 @@ export default function About() {
                     </div>
 
                     {/* Timeline card */}
-                    <div className={`w-5/12 ${index % 2 === 0 ? "pr-8 text-right" : "ml-auto pl-8"}`}>
+                    <div
+                      className={`w-5/12 ${
+                        index % 2 === 0 ? "pr-8 text-right" : "ml-auto pl-8"
+                      }`}
+                    >
                       <Card className="bg-gray-100">
                         <CardContent className="p-6">
                           <h3 className="font-semibold text-gray-900 mb-2">
@@ -267,7 +272,6 @@ export default function About() {
                       </Card>
                     </div>
                   </div>
-
                 ))}
               </div>
             </div>
@@ -338,12 +342,8 @@ export default function About() {
                     <p className="text-gray-600 text-sm mb-4">{post.excerpt}</p>
                     <p className="text-gray-500 text-xs">{post.date}</p>
                     <div className="flex items-center gap-1 text-green-800 text-sm mt-2">
-
                       <span>Read More</span>
-                      <ArrowRight
-                        width={14}
-                        height={14}
-                      />
+                      <ArrowRight width={14} height={14} />
                     </div>
                   </CardContent>
                 </Card>
