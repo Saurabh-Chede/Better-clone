@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Image from "next/image";
 import {
   Select,
   SelectContent,
@@ -11,18 +12,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-import { Card, CardContent } from "@/components/ui/card";
-import { Phone } from "lucide-react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import Monthly from "./Monthly";
 
 export default function Mortgage() {
   const [homePrice, setHomePrice] = useState(300000);
   const [downPayment, setDownPayment] = useState(60000);
   const [downPaymentPercent, setDownPaymentPercent] = useState(20);
   const [loanTerm, setLoanTerm] = useState(30);
-  const [interestRate] = useState(6.5); // Fixed for this example
+  const [interestRate, setInterestRate] = useState(6.5);
+  const [zipCode, setZipCode] = useState("401501");
 
   // Calculate monthly payment
   const loanAmount = homePrice - downPayment;
@@ -33,8 +33,8 @@ export default function Mortgage() {
     (Math.pow(1 + monthlyRate, numPayments) - 1);
 
   const principalAndInterest = Math.round(monthlyPayment);
-  const propertyTaxes = Math.round((homePrice * 0.012) / 12); // 1.2% annually
-  const homeInsurance = Math.round((homePrice * 0.0035) / 12); // 0.35% annually
+  const propertyTaxes = Math.round((homePrice * 0.012) / 12);
+  const homeInsurance = Math.round((homePrice * 0.0035) / 12);
   const hoaFees = 150;
   const utilities = 200;
 
@@ -54,232 +54,226 @@ export default function Mortgage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      {/* <header className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-8">
-              <div className="text-2xl font-bold text-green-600">Better</div>
-              <nav className="hidden md:flex space-x-8">
-                <a href="#" className="text-gray-700 hover:text-gray-900">
-                  Buy
-                </a>
-                <a href="#" className="text-gray-700 hover:text-gray-900">
-                  Refinance
-                </a>
-                <a href="#" className="text-gray-700 hover:text-gray-900">
-                  HELOC
-                </a>
-                <a href="#" className="text-gray-700 hover:text-gray-900">
-                  Rates
-                </a>
-                <a href="#" className="text-gray-700 hover:text-gray-900">
-                  Better+
-                </a>
-              </nav>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Phone className="w-5 h-5 text-gray-600" />
-              <a href="#" className="text-gray-700 hover:text-gray-900">
-                Sign in
-              </a>
-              <Button className="bg-green-600 hover:bg-green-700">
-                Continue
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header> */}
-      <Navbar></Navbar>
+    <div className="min-h-screen">
+      <Navbar forceWhiteNav />
+      <div className="">
+        <div className="bg-green-50 px-4 sm:px-6 lg:px-14 py-8 lg:py-16 mx-auto">
+          <div className="mb-12">
+            <h1 className="text-4xl lg:text-5xl font-semibold text-[#292b29] mb-4">
+              Mortgage Calculator
+            </h1>
+            <p className="text-gray-600 mb-8">
+              Free mortgage calculator to estimate your monthly mortgage
+              payments with annual amortization.
+              <br />
+              Discover how all factors can affect your payment.
+            </p>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Main Calculator Section */}
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Mortgage Calculator
-          </h1>
-          <p className="text-gray-600 mb-8">
-            Our mortgage calculator includes key factors like homeowners
-            association fees, property taxes, and private mortgage insurance
-            (PMI). Get an accurate estimate and apply for a mortgage today.
-          </p>
+            <div>
+              <div className="grid md:grid-cols-3 gap-8 mb-8">
+                {/* <div>
+                  <Label className="text-base text-gray-600 mb-2 block">
+                    Home price
+                  </Label>
+                  <div className="relative">
+                    <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#292b29] text-2xl lg:text-4xl font-bold">
+                      $
+                    </span>
+                    <Input
+                      type="text"
+                      value={homePrice.toLocaleString()}
+                      onChange={(e) =>
+                        setHomePrice(
+                          Number(e.target.value.replace(/,/g, "")) || 0
+                        )
+                      }
+                      className="h-[64px] text-2xl  lg:text-4xl px-2 lg:px-4 text-[#292b29]  font-bold border border-green-900 bg-white rounded-lg shadow-sm"
+                    />
+                  </div>
+                </div> */}
+                <div>
+                  <Label className="text-base text-gray-600 mb-2 block">
+                    Home price
+                  </Label>
+                  <div className="relative">
+                    <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[#292b29] text-2xl lg:text-4xl font-bold">
+                      $
+                    </span>
+                    <Input
+                      type="text"
+                      value={homePrice.toLocaleString()}
+                      onChange={(e) =>
+                        setHomePrice(
+                          Number(e.target.value.replace(/,/g, "")) || 0
+                        )
+                      }
+                      className="h-[64px] text-2xl md:text-3xl lg:text-4xl pl-10 pr-4 text-[#292b29] font-bold border border-green-900 bg-white rounded-lg shadow-sm"
+                    />
+                  </div>
+                </div>
 
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <div className="grid md:grid-cols-3 gap-8 mb-8">
-              <div>
-                <Label className="text-sm text-gray-600 mb-2 block">
-                  Home price
-                </Label>
-                <div className="text-3xl font-bold text-gray-900">
-                  ${homePrice.toLocaleString()}
+                <div>
+                  <Label className="text-sm text-gray-600 mb-2 block">
+                    Monthly payment
+                  </Label>
+                  <div className="text-3xl font-bold text-gray-900 lg:mt-3 md:mt-6 lg:text-5xl">
+                    ${Math.round(totalMonthlyPayment).toLocaleString()}/mo
+                  </div>
+                </div>
+                <div className="flex items-end lg:justify-end">
+                  <Button className="bg-[#017848] lg:w-[60%] text-white lg:px-10 lg:py-8">
+                    Get pre-approved
+                  </Button>
                 </div>
               </div>
-              <div>
-                <Label className="text-sm text-gray-600 mb-2 block">
-                  Monthly payment
-                </Label>
-                <div className="text-3xl font-bold text-gray-900">
-                  ${Math.round(totalMonthlyPayment).toLocaleString()}/mo
-                </div>
-              </div>
-              <div className="flex items-end">
-                <Button className="bg-green-600 hover:bg-green-700 w-full">
-                  Get pre-approved
-                </Button>
-              </div>
-            </div>
 
-            {/* <div className="mb-8">
-              <Slider
-                value={[homePrice]}
-                onValueChange={(value) => setHomePrice(value[0])}
-                max={1000000}
-                min={100000}
-                step={10000}
-                className="w-full"
-              />
-            </div> */}
-
-            <div className="mb-8">
-              <Slider
-                value={[homePrice]}
-                onValueChange={(value) => setHomePrice(value[0])}
-                max={1000000}
-                min={100000}
-                step={10000}
-                
-              />
-            </div>
-
-            <div className="grid md:grid-cols-4 gap-4">
-              <div>
-                <Label className="text-sm text-gray-600 mb-2 block">
-                  Amount
-                </Label>
-                <div className="relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
-                    $
-                  </span>
-                  <Input
-                    type="text"
-                    value={downPayment.toLocaleString()}
-                    onChange={(e) =>
-                      handleDownPaymentChange(e.target.value.replace(/,/g, ""))
-                    }
-                    className="pl-8"
+              <div className="mb-8">
+                <div className="relative mt-8 mb-6 mx-4">
+                  <input
+                    type="range"
+                    min={100000}
+                    max={1000000}
+                    step={10000}
+                    value={homePrice}
+                    onChange={(e) => setHomePrice(Number(e.target.value))}
+                    className="w-full h-1 rounded-full appearance-none cursor-pointer bg-gray-200 accent-emerald-800"
+                    style={{
+                      backgroundImage: `linear-gradient(to right, #065f46 ${
+                        (homePrice - 100000) / 9000
+                      }%, #e5e7eb ${(homePrice - 100000) / 9000}%)`,
+                    }}
                   />
                 </div>
               </div>
-              <div>
-                <Label className="text-sm text-gray-600 mb-2 block">
-                  Down payment
-                </Label>
-                <div className="relative">
-                  <Input
+              <div className="grid md:grid-cols-4 gap-4">
+                {/* ZIP code */}
+                <div>
+                  <Label className="text-sm text-gray-600 mb-2 block">
+                    ZIP code
+                  </Label>
+                  <input
                     type="text"
-                    value={`${downPaymentPercent}%`}
-                    onChange={(e) =>
-                      handleDownPaymentPercentChange(
-                        e.target.value.replace("%", "")
-                      )
-                    }
-                    className="pr-8"
+                    value={zipCode}
+                    onChange={(e) => setZipCode(e.target.value)}
+                    className="h-[56px] w-full text-lg font-semibold border border-gray-300 rounded-md px-2.5
+                     focus:border-emerald-700 focus:shadow-[0_0_0_3px_inset] focus:shadow-emerald-700 
+                              hover:border-emerald-700 hover:shadow-[0_0_0_3px_inset] hover:shadow-emerald-700 
+                                transition duration-300 outline-none focus:ring-0 focus:outline-none"
                   />
-                  <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
-                    %
-                  </span>
+                </div>
+
+                {/* Down payment */}
+                <div className="flex gap-2">
+                  <div className="relative items-center w-[80%]">
+                    <Label className="text-sm text-gray-600 mb-2 block">
+                      Down payment
+                    </Label>
+                    <span className="absolute left-3 top-[42px] text-black text-lg font-bold">
+                      $
+                    </span>
+                    <input
+                      type="text"
+                      value={downPayment.toLocaleString()}
+                      onChange={(e) =>
+                        handleDownPaymentChange(
+                          e.target.value.replace(/,/g, "")
+                        )
+                      }
+                      className="pl-7 h-[56px] w-full text-lg font-semibold border border-gray-300 rounded-md 
+                              focus:border-emerald-700 focus:shadow-[0_0_0_3px_inset] focus:shadow-emerald-700 
+                              hover:border-emerald-700 hover:shadow-[0_0_0_3px_inset] hover:shadow-emerald-700 
+                                transition duration-300 outline-none focus:ring-0 focus:outline-none px-2.5"
+                    />
+                  </div>
+
+                  {/* Percentage (20%) */}
+                  <div className="relative w-[20%]">
+                    <Label className="text-sm text-gray-600 mb-2 block invisible">
+                      %
+                    </Label>
+                    <input
+                      type="text"
+                      value={downPaymentPercent}
+                      onChange={(e) =>
+                        handleDownPaymentPercentChange(
+                          e.target.value.replace("%", "")
+                        )
+                      }
+                      className="pr-5 h-[56px] w-full text-lg font-semibold border border-gray-300 rounded-md px-2.5 
+                       focus:border-emerald-700 focus:shadow-[0_0_0_3px_inset] focus:shadow-emerald-700 
+                              hover:border-emerald-700 hover:shadow-[0_0_0_3px_inset] hover:shadow-emerald-700 
+                                transition duration-300 outline-none focus:ring-0 focus:outline-none "
+                    />
+                    <span className="absolute right-1 top-[42px] text-black text-lg font-bold">
+                      %
+                    </span>
+                  </div>
+                </div>
+
+                {/* Interest Rate */}
+                <div>
+                  <Label className="text-sm text-gray-600 mb-2 block">
+                    Interest rate
+                  </Label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      value={interestRate}
+                      onChange={(e) => setInterestRate(e.target.value)}
+                      className="h-[56px] w-full text-lg font-semibold border border-gray-300 rounded-md px-2.5
+                       focus:border-emerald-700 focus:shadow-[0_0_0_3px_inset] focus:shadow-emerald-700 
+                              hover:border-emerald-700 hover:shadow-[0_0_0_3px_inset] hover:shadow-emerald-700 
+                                transition duration-300 outline-none focus:ring-0 focus:outline-none"
+                    />
+                    <span className="absolute right-3 top-[16px] text-black text-lg font-bold">
+                      %
+                    </span>
+                  </div>
+                </div>
+
+                {/* Loan Term */}
+                <div>
+                  <Label className="text-sm text-gray-600 mb-2 block">
+                    Length of loan
+                  </Label>
+                  <Select
+                    value={loanTerm.toString()}
+                    onValueChange={(value) => setLoanTerm(Number(value))}
+                  >
+                    <SelectTrigger
+                      className="h-[56px] text-lg font-semibold border border-gray-300 rounded-md w-full py-7  focus:border-emerald-700 focus:shadow-[0_0_0_3px_inset] focus:shadow-emerald-700 
+                              hover:border-emerald-700 hover:shadow-[0_0_0_3px_inset] hover:shadow-emerald-700 
+                                transition duration-300 outline-none focus:ring-0 focus:outline-none px-2.5"
+                    >
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="15">15 years</SelectItem>
+                      <SelectItem value="20">20 years</SelectItem>
+                      <SelectItem value="30">30 years</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
-              <div>
-                <Label className="text-sm text-gray-600 mb-2 block">Rate</Label>
-                <Input
-                  type="text"
-                  value="6.500"
-                  readOnly
-                  className="bg-gray-50"
-                />
-              </div>
-              <div>
-                <Label className="text-sm text-gray-600 mb-2 block">Term</Label>
-                <Select
-                  value={loanTerm.toString()}
-                  onValueChange={(value) => setLoanTerm(Number.parseInt(value))}
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="15">15 years</SelectItem>
-                    <SelectItem value="30">30 years</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
           </div>
         </div>
-
-        {/* Monthly Payment Breakdown */}
-        <div className="bg-white rounded-lg shadow-lg p-8 mb-12">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
-            Monthly payment breakdown
-          </h2>
-          <div className="text-3xl font-bold text-gray-900 mb-6">
-            ${Math.round(totalMonthlyPayment).toLocaleString()}/mo
-          </div>
-
-          <div className="space-y-4 mb-6">
-            <div className="flex justify-between items-center">
-              <div className="flex items-center">
-                <div className="w-4 h-4 bg-green-600 rounded mr-3"></div>
-                <span className="text-gray-700">Principal & interest</span>
-              </div>
-              <span className="font-semibold">
-                ${principalAndInterest.toLocaleString()}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <div className="flex items-center">
-                <div className="w-4 h-4 bg-blue-500 rounded mr-3"></div>
-                <span className="text-gray-700">Property taxes</span>
-              </div>
-              <span className="font-semibold">${propertyTaxes}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <div className="flex items-center">
-                <div className="w-4 h-4 bg-orange-400 rounded mr-3"></div>
-                <span className="text-gray-700">Homeowners insurance</span>
-              </div>
-              <span className="font-semibold">${homeInsurance}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <div className="flex items-center">
-                <div className="w-4 h-4 bg-purple-500 rounded mr-3"></div>
-                <span className="text-gray-700">HOA fees</span>
-              </div>
-              <span className="font-semibold">${hoaFees}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <div className="flex items-center">
-                <div className="w-4 h-4 bg-gray-400 rounded mr-3"></div>
-                <span className="text-gray-700">Utilities</span>
-              </div>
-              <span className="font-semibold">${utilities}</span>
-            </div>
-          </div>
-
-          <Button variant="outline" className="w-full bg-transparent">
-            Copy estimate link
-          </Button>
-        </div>
+        <Monthly
+          principalAndInterest={principalAndInterest}
+          propertyTaxes={propertyTaxes}
+          homeInsurance={homeInsurance}
+          hoaFees={hoaFees}
+          utilities={utilities}
+          totalMonthlyPayment={totalMonthlyPayment}
+        ></Monthly>
 
         {/* Educational Content */}
-        <div className="space-y-12">
+        <div className="px-4 sm:px-6 lg:px-14 py-8 lg:py-16 mx-auto">
           <section className="border-t border-gray-500 border-b pb-6">
-            <h2 className="text-2xl font-bold text-gray-900 mt-5 mb-4">
+            <h2 className="text-2xl lg:text-[32px] font-bold text-gray-900 my-12">
               How does a mortgage calculator help me?
             </h2>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 text-[16px] leading-relaxed pb-8">
               When deciding how much house you can afford, one of the most
               important pieces to determine is whether a home will fit into your
               monthly budget. A mortgage calculator helps you understand the
@@ -291,16 +285,16 @@ export default function Mortgage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl lg:text-[32px] font-bold text-gray-900 my-12">
               How much monthly mortgage payment can I afford?
             </h2>
-            <p className="text-gray-600 leading-relaxed mb-4">
+            <p className="text-gray-600 leading-relaxed pb-4">
               Lenders determine how much you can afford on a monthly housing
               payment by calculating your debt-to-income ratio (DTI). The
               maximum DTI you can have in order to qualify for most mortgage
               loans is often between 43%-50%, with most lenders preferring 43%.
             </p>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-gray-600 leading-relaxed pb-8">
               Your DTI is the balance between your income and your debt. It
               helps lenders understand how safe or risky it is for them to
               approve you for a mortgage. Depending on your down payment, you
@@ -309,130 +303,91 @@ export default function Mortgage() {
               likely to give you a higher interest rate. But if you have a
               larger down payment, you may have more wiggle room on your DTI.
             </p>
+
+            <div className="flex flex-col justify-center mx-auto items-center">
+              <div className="flex">
+                <p className="text-gray-600 leading-tight lg:leading-relaxed">
+                  Formula for calculating your debt-to-income (DTI) ratio:
+                </p>
+              </div>
+              <Image
+                src="/images/Mortgage/imgi_1_dti-formula.jpg"
+                width={780}
+                height={153}
+              ></Image>
+              <Image
+                src="/images/Mortgage/imgi_2_dti-example.jpg"
+                width={780}
+                height={525}
+                className="mt-3.5"
+              ></Image>
+            </div>
           </section>
 
-          {/* Debt-to-Income Example */}
-          {/* <Card>
-            <CardContent className="p-8">
-              <div className="text-center mb-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  Monthly Debt Payments
-                </h3>
-                <div className="text-sm text-gray-600">
-                  Monthly Gross Income
-                </div>
-                <div className="text-4xl font-bold text-gray-900 my-4">
-                  $2,500 <span className="text-2xl">÷</span> $6,500{" "}
-                  <span className="text-2xl">=</span> 38% DTI
-                </div>
-                <div className="text-sm text-gray-600">
-                  The above scenario is for illustrative purposes only
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-4">Debts</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span>Auto loan</span>
-                      <span>$350/month</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Student loans</span>
-                      <span>$200/month</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Credit cards</span>
-                      <span>$200/month</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Personal loan</span>
-                      <span>$100/month</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Housing Debt</span>
-                      <span>$1,650/month</span>
-                    </div>
-                    <div className="border-t pt-2 flex justify-between font-semibold">
-                      <span>$2,500 monthly debt obligation</span>
-                      <span>$4,500 monthly income</span>
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-4">Income</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span>Monthly salary (pre-tax)</span>
-                      <span>$5,000/month</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>Monthly side gig income</span>
-                      <span>$1,500/month</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card> */}
-
-          <section>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <section className="border-t border-gray-500 border-b">
+            <h2 className="text-2xl lg:text-[32px] font-bold text-gray-900 my-12">
               How to calculate monthly mortgage payments?
             </h2>
             <p className="text-gray-600 leading-relaxed mb-4">
               Your monthly mortgage payment includes loan principal and
               interest, property taxes, homeowners insurance, and mortgage
-              insurance (PMI), if applicable. While it's typically included in
-              your monthly payment, homeowners insurance and property taxes are
-              not technically part of your mortgage payment.
+              insurance (PMI), if applicable. While not typically included in
+              your mortgage payment, homeowners also pay monthly utilities and
+              sometimes pay homeowners association (HOA) fees, so it’s a good
+              idea to factor these into your monthly budget. This mortgage
+              calculator factors in all these typical monthly costs so you can
+              really crunch the numbers.
             </p>
 
-            <h3 className="text-xl font-bold text-gray-900 mb-4 mt-8">
+            <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-4 mt-8">
               Formula for calculating monthly mortgage payments
             </h3>
             <p className="text-gray-600 leading-relaxed mb-4">
-              This formula can help you crunch the numbers to see how much house
-              you can afford, or how different interest rates affect your
-              payment.
+              The easiest way to calculate your mortgage payment is to use a
+              calculator, but for the curious or mathematically inclined, here’s
+              the formula for calculating principal and interest yourself:
             </p>
 
-            <div className="bg-gray-100 p-6 rounded-lg mb-6">
-              <div className="text-center">
-                <div className="text-lg font-mono mb-4">
-                  M = P [ r(1+r)^n ] / [ (1+r)^n - 1 ]
-                </div>
-                <div className="text-sm text-gray-600">
-                  Monthly mortgage payments formula
-                </div>
-              </div>
+            <div className="flex flex-col justify-center mx-auto items-center">
+              <Image
+                src="/images/Mortgage/imgi_3_monthly-mortgage-payments-formula.jpg"
+                width={780}
+                height={150}
+              ></Image>
             </div>
 
-            <div className="text-sm text-gray-600 space-y-2">
-              <p>
-                <strong>Where:</strong>
-              </p>
-              <p>• M = monthly mortgage payment</p>
-              <p>• P = the principal, or the initial amount you borrowed</p>
-              <p>
-                • r = your monthly interest rate. Lenders provide you an annual
-                rate so you'll need to divide that figure by 12. So if your rate
-                is 5%, then the monthly rate would equal 0.05/12 = 0.004167
-              </p>
-              <p>
-                • n = the number of payments, or the number of months you'll be
-                paying the loan
-              </p>
-              <p>
-                • For most mortgages, you'll make a payment every month for 30
-                years, so 360 payments. A 15-year mortgage would be 180
-                payments.
-              </p>
+            <div className="text-sm text-gray-600 space-y-2 flex flex-col mt-2.5 mx-auto justify-center items-center max-w-3xl ">
+              <div className="flex flex-col flex-start gap-2">
+                <p>
+                  <strong>Where:</strong>
+                </p>
+                <p>• M = monthly mortgage payment</p>
+                <p>• P = the principal, or the initial amount you borrowed</p>
+                <p>
+                  • r = your monthly interest rate. Lenders provide you an
+                  annual rate so you'll need to divide that figure by 12. So if
+                  your rate is 5%, then the monthly rate would equal 0.05/12 =
+                  0.004167
+                </p>
+                <p>
+                  • n = the number of payments, or the number of months you'll
+                  be paying the loan
+                </p>
+                <p>
+                  • For most mortgages, you'll make a payment every month for 30
+                  years, so 360 payments. A 15-year mortgage would be 180
+                  payments.
+                </p>
+                <img
+                  src="/images/Mortgage/imgi_4_monthly-mortgage-payments-example.jpg"
+                  alt="img"
+                  className="mb-3.5"
+                />
+              </div>
             </div>
           </section>
 
-          <section>
+          <section className="py-12">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
               How to use this mortgage calculator?
             </h2>
@@ -441,6 +396,32 @@ export default function Mortgage() {
               interest rates, and mortgage lengths to see how they impact your
               monthly mortgage payments.
             </p>
+            <p className="text-gray-600 leading-relaxed mt-2">
+              Increasing your down payment and decreasing your interest rate and
+              mortgage term length will make your monthly payment go down.
+              Taxes, insurance, and HOA fees will vary by location. If you enter
+              a down payment amount that’s less than 20% of the home price,
+              private mortgage insurance (PMI) costs will be added to your
+              monthly mortgage payment. As the costs of utilities can vary from
+              county to county, we’ve included a utilities estimate that you can
+              break down by service. If you’re thinking about buying a condo or
+              into a community with a Homeowners Association (HOA), you can add
+              HOA fees.
+            </p>
+
+            <p className="text-gray-600 leading-relaxed">
+              The only amounts we haven’t included are the money you’ll need to
+              save for annual home maintenance/repairs or the costs of home
+              improvements. To see how much home you can afford including these
+              costs, take a look at the Better home affordability calculator.
+            </p>
+            <p className="text-gray-600 leading-relaxed">
+              Fun fact: Property tax rates are extremely localized, so two homes
+              of roughly the same size and quality on either side of a municipal
+              border could have very different tax rates. Buying in an area with
+              a lower property tax rate may make it easier for you to afford a
+              higher-priced home.
+            </p>
           </section>
 
           <section>
@@ -448,9 +429,10 @@ export default function Mortgage() {
               Do you know your property tax rate?
             </h2>
             <p className="text-gray-600 leading-relaxed mb-6">
-              Don't worry if you don't know your property tax rate; our
-              calculator uses the average property tax rate for your county to
-              estimate your monthly property tax payment.
+              While exact property tax rates vary by county, it can be helpful
+              to look at taxes on the state level to get an idea for taxes in
+              your state. Here’s a helpful chart from Forbes breaking down the
+              Census Bureau’s 2021 American Community Survey 5-year estimate:
             </p>
 
             <div className="bg-white border rounded-lg overflow-hidden">
@@ -502,7 +484,7 @@ export default function Mortgage() {
           </section>
         </div>
       </div>
-       <Footer></Footer>
+      <Footer />
     </div>
   );
 }

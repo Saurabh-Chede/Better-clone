@@ -67,6 +67,7 @@ const content = {
                             width={200}
                             height={200}
                             className="w-full h-full object-cover"
+                            alt="one-day-mortgage"
                         />
                     </div>
                 </CardContent>
@@ -388,21 +389,25 @@ function Questions() {
     return (
         <div className="px-6 mt-10">
             <div className="flex flex-col lg:flex lg:flex-row justify-between">
-                <h1 className="text-5xl lg:text-5xl font-bold leading-tight mb-4 px-3">
-                    Got questions?
-                    <br />
-                    We've got answers
-                </h1>
-                <section className="w-full lg:w-[50%]">
-                    <div className="flex gap-4">
+                <div className="flex flex-col lg:px-6">
+                    <h1 className="text-5xl lg:text-5xl font-bold leading-tight tracking-tighter opacity-90 px-0">
+                        Got questions?
+                    </h1>
+                    <h1 className="text-5xl lg:text-5xl font-bold leading-tight tracking-tighter opacity-90 mb-4 px-0">
+                        We've got answers
+                    </h1>
+                </div>
+                <section className="w-full lg:w-auto lg:pr-8 lg:mt-16">
+                    <div className="flex gap-2 lg:gap-4">
                         {tabs.map((tab) => (
                             <button
                                 key={tab.value}
                                 onClick={() => setActiveTab(tab.value)}
-                                className={`px-4 py-2 rounded-full border ${activeTab === tab.value
-                                        ? "border-green-600 text-white bg-green-600"
-                                        : "border-gray-300 text-gray-800 bg-white"
-                                    } transition`}
+                                className={`lg:px-4 lg:py-2 md:px-4 md:py-2 px-[4.6px] py-1.5  rounded-4xl border transition duration-300 outline-none
+                                        ${activeTab === tab.value
+                                        ? "border-emerald-700 text-green-950 shadow-[0_0_0_3px_inset] shadow-emerald-700"
+                                        : "border-gray-300 bg-white text-gray-800 hover:border-emerald-700 hover:shadow-[0_0_0_3px_inset] hover:shadow-emerald-700 focus:border-emerald-700 focus:shadow-[0_0_0_3px_inset] focus:shadow-emerald-700"}
+  `}
                             >
                                 {tab.label}
                             </button>

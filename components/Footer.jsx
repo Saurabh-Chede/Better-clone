@@ -234,10 +234,10 @@ export default function Footer () {
             {/* Equal Housing Logos */}
             <div className="flex space-x-4">
               <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center">
-                <span className="text-xs text-gray-600 font-bold">EHO</span>
+                <span className="text-xs text-gray-600 font-bold"><img src="/images/Mortgage/download.svg" alt="" /></span>
               </div>
               <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center">
-                <span className="text-xs text-gray-600 font-bold">EHO</span>
+                <span className="text-xs text-gray-600 font-bold"><img src="/images/Mortgage/download1.svg" alt="" /></span>
               </div>
             </div>
           </div>
